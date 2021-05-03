@@ -2,7 +2,7 @@
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
 #include <iostream>
-
+#include <string>
 enum class SimState
 {
     ON,
@@ -24,6 +24,7 @@ private:
     SimState _sim_state;
 
     void initSystems();
-    void runLoop();
+    void simLoop();
     void processInput();
+    void draw();
 };

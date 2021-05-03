@@ -4,6 +4,8 @@
 
 #include "Simulation.h"
 
+#define GLEW_STATIC // For building glew
+
 int main(int argc, char** argv)
 {
 	Simulation mainSim;

@@ -47,8 +47,10 @@
                 // Link ====
                 "-lmingw32",
                 "-lSDL2main",
-                "-lSDL2"//,
-                // "-mwindows" // Don't launch command prompt when we launch the program
+                "-lSDL2",
+                "-lglew32",
+                "-lglew32s",
+                "-lopengl32"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
