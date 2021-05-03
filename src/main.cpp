@@ -9,8 +9,6 @@ int main(int argc, char** argv)
 	Simulation mainSim;
     mainSim.run();
 
-    std::cin.get();
-
 	return 0;
 }
 
