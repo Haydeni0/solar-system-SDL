@@ -1,0 +1,63 @@
+{
+    "tasks": [
+        {
+            // RUN
+            "type": "cppbuild",
+            "label": "Run",
+            "command": "",
+            "args": [
+                "${workspaceFolder}\\build\\PROJECT.exe"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Run the project.",
+            "dependsOn": [ // Build before running
+                "Build"
+            ]
+        },
+        {
+            // BUILD
+            "type": "cppbuild",
+            "label": "Build",
+            "command": "g++",
+            "args": [
+                "-std=c++17",
+                "-g", // Show debug information
+                // Show errors
+                "-Wall",
+                "-Wshadow",
+                // "-Werror",
+                // Compile ====
+                "src\\*.cpp", // Every *.cpp in tools
+                // Specify target path ====
+                "-o",
+                "build\\PROJECT.exe",
+                // Include ====
+                "-I",
+                "src",
+                "-I",
+                "include",
+                "-L",
+                "libs",
+                // Link ====
+                "-lmingw32",
+                "-lSDL2main",
+                "-lSDL2"//,
+                // "-mwindows" // Don't launch command prompt when we launch the program
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Build the project."
+        }
+    ],
+    "version": "2.0.0"
+}
