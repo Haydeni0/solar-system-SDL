@@ -3,6 +3,8 @@
 #include <GL/glew.h>
 #include <iostream>
 #include <string>
+
+#include "sprite.h"
 enum class SimState
 {
     ON,
@@ -13,18 +15,19 @@ class Simulation
 {
 public:
     Simulation();
-    ~Simulation();
 
     void run();
 
 private:
-    SDL_Window *_window;
+    SDL_Window *_window{nullptr};
     int _screen_width;
     int _screen_height;
     SimState _sim_state;
+    Sprite _sprite;
 
     void initSystems();
     void simLoop();
     void processInput();
     void draw();
+
 };

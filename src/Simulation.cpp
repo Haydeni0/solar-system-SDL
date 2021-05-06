@@ -1,5 +1,5 @@
 
-#include "Simulation.h"
+#include "simulation.h"
 
 void fatalError(std::string error_string)
 { // Function to print a fatal error and quit,
@@ -12,18 +12,15 @@ void fatalError(std::string error_string)
 
 Simulation::Simulation()
 {
-    _window = nullptr;
     _screen_width = 1024;
     _screen_height = 720;
-}
-Simulation::~Simulation()
-{
 }
 
 void Simulation::run()
 {
     initSystems();
-    simLoop();
+    _sprite.init(-1, -1, 1, 1);
+    simLoop();  
 }
 
 void Simulation::initSystems()
@@ -31,21 +28,23 @@ void Simulation::initSystems()
     // Initialise SDL
     SDL_Init(SDL_INIT_EVERYTHING);
 
-    // Create window
+    // Open an SDL window
     _window = SDL_CreateWindow("Simulation", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                                _screen_width, _screen_height, SDL_WINDOW_OPENGL);
     if (_window == nullptr)
         fatalError("SDL window could not be created");
 
+    // Set up OpenGL context
     SDL_GLContext gl_context{SDL_GL_CreateContext(_window)};
     if (gl_context == nullptr)
         fatalError("SDL_GL context could not be created");
-    
+
+    // Set up glew (optional but recommended)
     GLenum error{glewInit()};
     if (error != GLEW_OK)
         fatalError("Could not initialise glew");
 
-    // Tell SDL we want to double buffer (smoother video)
+    // Tell SDL we want a double buffered window (smoother, no flickering)
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
     // Set background colour (when GL_COLOR_BUFFER_BIT is called)
@@ -91,5 +90,7 @@ void Simulation::draw()
 
     // Swap the two buffers that we have
     SDL_GL_SwapWindow(_window);
+
+    _sprite.draw();
 
 }
