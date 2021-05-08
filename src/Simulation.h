@@ -1,3 +1,6 @@
+/*
+Where all the actual simulation happens
+*/
 #pragma once
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
@@ -5,6 +8,7 @@
 #include <string>
 
 #include "sprite.h"
+#include "GLSLProgram.h"
 enum class SimState
 {
     ON,
@@ -15,6 +19,7 @@ class Simulation
 {
 public:
     Simulation();
+    ~Simulation();
 
     void run();
 
@@ -26,8 +31,10 @@ private:
     Sprite _sprite;
 
     void initSystems();
+    void initShaders();
     void simLoop();
     void processInput();
     void draw();
 
+    GLSLProgram _colour_program;
 };

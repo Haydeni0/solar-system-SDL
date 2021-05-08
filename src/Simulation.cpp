@@ -1,14 +1,5 @@
-
 #include "simulation.h"
-
-void fatalError(std::string error_string)
-{ // Function to print a fatal error and quit,
-    // Move to another file eventually
-    std::cout << error_string << "\n";
-    std::cout << "Enter any key to quit...";
-    std::cin.get();
-    SDL_Quit();
-}
+#include "errors.h"
 
 Simulation::Simulation()
 {
@@ -16,11 +7,15 @@ Simulation::Simulation()
     _screen_height = 720;
 }
 
+Simulation::~Simulation()
+{
+}
+
 void Simulation::run()
 {
     initSystems();
     _sprite.init(-1, -1, 1, 1);
-    simLoop();  
+    simLoop();
 }
 
 void Simulation::initSystems()
@@ -49,6 +44,16 @@ void Simulation::initSystems()
 
     // Set background colour (when GL_COLOR_BUFFER_BIT is called)
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+    initShaders();
+}
+
+void Simulation::initShaders()
+{
+    _colour_program.compileShaders("src/shaders/colourShading.vert", "src/shaders/colourShading.frag");
+    // Add the attribute defined in the vertex shader file
+    _colour_program.addAttribute("vertex_position");
+    _colour_program.linkShaders();
 }
 
 void Simulation::simLoop()
@@ -88,9 +93,13 @@ void Simulation::draw()
     glClearDepth(1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER);
 
-    // Swap the two buffers that we have
-    SDL_GL_SwapWindow(_window);
+    _colour_program.use();
 
+    // Draw the sprite
     _sprite.draw();
 
+    _colour_program.unuse();
+
+    // Swap the two buffers that we have
+    SDL_GL_SwapWindow(_window);
 }

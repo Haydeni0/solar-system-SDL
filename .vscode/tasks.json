@@ -8,6 +8,9 @@
             "args": [
                 "${workspaceFolder}\\build\\PROJECT.exe"
             ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
             "problemMatcher": [
                 "$gcc"
             ],

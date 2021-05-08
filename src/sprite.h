@@ -1,3 +1,6 @@
+/*
+A Sprite that shows up on the screen
+*/
 #pragma once
 #include <GL/glew.h>
 
