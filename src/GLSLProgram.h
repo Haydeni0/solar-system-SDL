@@ -18,11 +18,11 @@ public:
 
     void linkShaders();
 
-    // Add an attribute
+    // Add an attribute to the shader. Should be called between compiling and linking
     void addAttribute(const std::string &attribute_name);
 
     // Get the location of a uniform variable
-    GLuint getUniformLocation(const std::string &uniform_name);
+    GLint getUniformLocation(const std::string &uniform_name);
 
     void use();
     void unuse();
