@@ -14,7 +14,7 @@ Simulation::~Simulation()
 void Simulation::run()
 {
     initSystems();
-    _sprite.init(-1, -1, 1, 1);
+    _sprite.init(-1, -1, 2, 2);
     simLoop();
 }
 
@@ -51,8 +51,9 @@ void Simulation::initSystems()
 void Simulation::initShaders()
 {
     _colour_program.compileShaders("src/shaders/colourShading.vert", "src/shaders/colourShading.frag");
-    // Add the attribute defined in the vertex shader file
+    // Add the attribute defined in the vertex shader file (use the same names as the variables in the glsl file)
     _colour_program.addAttribute("vertex_position");
+    _colour_program.addAttribute("vertex_colour");
     _colour_program.linkShaders();
 }
 
