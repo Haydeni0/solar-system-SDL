@@ -1,10 +1,9 @@
 #include "simulation.h"
 #include "errors.h"
 
-Simulation::Simulation()
+Simulation::Simulation() : _time{0.0f}, _screen_width{1024}, _screen_height{720},
+                           _sim_state{SimState::ON}, _window{nullptr}
 {
-    _screen_width = 1024;
-    _screen_height = 720;
 }
 
 Simulation::~Simulation()
@@ -60,10 +59,10 @@ void Simulation::initShaders()
 void Simulation::simLoop()
 {
     // Start the simulation loop running
-    _sim_state = SimState::ON;
     while (_sim_state == SimState::ON)
     {
         processInput();
+        _time += 0.01; // Increment time
         draw();
     }
 }
@@ -91,16 +90,23 @@ void Simulation::processInput()
 
 void Simulation::draw()
 {
+    // Set the base depth to 1.0
     glClearDepth(1.0);
+    // Clear the colour and the depth buffer
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER);
 
     _colour_program.use();
+
+    // Get the location of the time uniform variable
+    GLuint timeLocation = _colour_program.getUniformLocation("time");
+    // Send the current time to the uniform
+    glUniform1f(timeLocation, _time);
 
     // Draw the sprite
     _sprite.draw();
 
     _colour_program.unuse();
 
-    // Swap the two buffers that we have
+    // Swap the two buffers that we have, and draw everything to the screen
     SDL_GL_SwapWindow(_window);
 }

@@ -5,6 +5,7 @@ in vec2 vertex_position;
 in vec4 vertex_colour;
 
 // Pass to the fragment shader
+out vec2 fragment_position;
 out vec4 fragment_colour;
 
 void main()
@@ -15,6 +16,8 @@ void main()
     gl_Position.z=0.;// No z coord
     // Indicate that the coordinates are normalised
     gl_Position.w=1.;
+    
+    fragment_position=vertex_position;
     
     // Set the fragment colour
     fragment_colour=vertex_colour;

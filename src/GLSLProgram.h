@@ -18,10 +18,13 @@ public:
 
     void linkShaders();
 
+    // Add an attribute
     void addAttribute(const std::string &attribute_name);
 
-    void use();
+    // Get the location of a uniform variable
+    GLuint getUniformLocation(const std::string &uniform_name);
 
+    void use();
     void unuse();
 
 private:

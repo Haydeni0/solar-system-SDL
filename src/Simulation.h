@@ -37,4 +37,6 @@ private:
     void draw();
 
     GLSLProgram _colour_program;
+
+    float _time;
 };
