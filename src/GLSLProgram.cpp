@@ -13,6 +13,9 @@ GLSLProgram::~GLSLProgram()
 void GLSLProgram::compileShaders(const std::string &vertex_shader_filepath,
                                  const std::string &fragment_shader_filepath)
 {
+    // Get a program object
+    _programID = glCreateProgram();
+
     _vertex_shaderID = glCreateShader(GL_VERTEX_SHADER);
     if (_vertex_shaderID == 0)
     {
@@ -75,8 +78,6 @@ void GLSLProgram::compileShader(const std::string &filepath, GLuint id)
 
 void GLSLProgram::linkShaders()
 {
-    // Get a program object
-    _programID = glCreateProgram();
 
     // Attach our shaders to our program
     glAttachShader(_programID, _vertex_shaderID);

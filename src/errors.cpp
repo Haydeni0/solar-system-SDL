@@ -1,4 +1,5 @@
 #include "errors.h"
+#include <cstdlib>
 
 void fatalError(std::string error_string)
 { // Function to print a fatal error and quit,
@@ -7,4 +8,5 @@ void fatalError(std::string error_string)
     std::cout << "Enter any key to quit...";
     std::cin.get();
     SDL_Quit();
+    exit(1421);
 }
