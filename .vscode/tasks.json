@@ -42,7 +42,7 @@
                 "build\\PROJECT.exe",
                 // Include ====
                 "-I",
-                "src",
+                "src\\headers",
                 "-I",
                 "include",
                 "-L",

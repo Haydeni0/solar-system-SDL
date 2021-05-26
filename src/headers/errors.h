@@ -5,5 +5,4 @@ File to handle/throw errors
 #include <iostream>
 #include <SDL2/SDL.h>
 
-
 extern void fatalError(std::string error_string);
