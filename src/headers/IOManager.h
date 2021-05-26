@@ -9,5 +9,5 @@ A static class to deal with file input and output
 class IOManager
 {
 public:
-    static bool readFileToBuffer(std::string filepath, std::vector<char> &buffer);
+    static bool readFileToBuffer(std::string filepath, std::vector<unsigned char> &buffer);
 };
